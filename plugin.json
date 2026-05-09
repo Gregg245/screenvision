@@ -1,0 +1,73 @@
+{
+  "name": "screenvision",
+  "short_name": "Screen Vision",
+  "version": "1.2.0",
+  "description": "Screen Vision — captures screenshots and returns them to the AI. PNG default for accurate text reading. Supports grim (Wayland), region zoom, sharpening, and connector-name targeting.",
+  "author": "sapphire",
+  "icon": "🖥",
+  "priority": 50,
+  "default_enabled": false,
+  "pip_dependencies": ["mss", "Pillow"],
+  "capabilities": {
+    "tools": ["tools/screenvision_tools.py"],
+    "hooks": {"prompt_inject": "hooks/prompt_inject.py"},
+    "daemon": {"entry": "daemon.py"},
+    "settings": [
+      {
+        "key": "monitor",
+        "type": "number",
+        "label": "Monitor Number",
+        "default": 1,
+        "help": "Which monitor to capture. 1 = primary monitor, 2 = second monitor, etc. Set to 0 to capture all monitors combined."
+      },
+      {
+        "key": "interval",
+        "type": "number",
+        "label": "Capture Interval (seconds)",
+        "default": 5,
+        "help": "How often to take a screenshot in the background (1–15 seconds)."
+      },
+      {
+        "key": "auto_start",
+        "type": "boolean",
+        "label": "Auto-start monitoring on launch",
+        "default": false,
+        "help": "Automatically begin capturing screenshots when Sapphire starts."
+      },
+      {
+        "key": "quality",
+        "type": "number",
+        "label": "JPEG Quality (1–95)",
+        "default": 80,
+        "help": "JPEG quality for background monitoring captures. On-demand capture_screen uses PNG by default (lossless)."
+      },
+      {
+        "key": "capture_format",
+        "type": "string",
+        "widget": "select",
+        "label": "On-demand Capture Format",
+        "default": "png",
+        "options": [
+          {"label": "PNG (lossless — best for reading text)", "value": "png"},
+          {"label": "JPEG (smaller file)", "value": "jpeg"}
+        ],
+        "help": "Format used by capture_screen. PNG is lossless and reads text far more accurately. JPEG is smaller."
+      },
+      {
+        "key": "sharpen",
+        "type": "boolean",
+        "widget": "checkbox",
+        "label": "Auto-sharpen captures",
+        "default": false,
+        "help": "Apply unsharp-mask sharpening to every on-demand capture. Improves small text legibility."
+      },
+      {
+        "key": "inject_hint",
+        "type": "boolean",
+        "label": "Inject status hint into system prompt",
+        "default": true,
+        "help": "When monitoring is active, remind the AI that screen capture is available."
+      }
+    ]
+  }
+}
