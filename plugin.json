@@ -1,17 +1,25 @@
 {
   "name": "screenvision",
   "short_name": "Screen Vision",
-  "version": "1.2.0",
+  "version": "1.0.2",
   "description": "Screen Vision — captures screenshots and returns them to the AI. PNG default for accurate text reading. Supports grim (Wayland), region zoom, sharpening, and connector-name targeting.",
   "author": "sapphire",
   "icon": "🖥",
   "priority": 50,
   "default_enabled": false,
-  "pip_dependencies": ["mss", "Pillow"],
+  "pip_dependencies": [
+    "Pillow"
+  ],
   "capabilities": {
-    "tools": ["tools/screenvision_tools.py"],
-    "hooks": {"prompt_inject": "hooks/prompt_inject.py"},
-    "daemon": {"entry": "daemon.py"},
+    "tools": [
+      "tools/screenvision_tools.py"
+    ],
+    "hooks": {
+      "prompt_inject": "hooks/prompt_inject.py"
+    },
+    "daemon": {
+      "entry": "daemon.py"
+    },
     "settings": [
       {
         "key": "monitor",
@@ -48,8 +56,14 @@
         "label": "On-demand Capture Format",
         "default": "png",
         "options": [
-          {"label": "PNG (lossless — best for reading text)", "value": "png"},
-          {"label": "JPEG (smaller file)", "value": "jpeg"}
+          {
+            "label": "PNG (lossless — best for reading text)",
+            "value": "png"
+          },
+          {
+            "label": "JPEG (smaller file)",
+            "value": "jpeg"
+          }
         ],
         "help": "Format used by capture_screen. PNG is lossless and reads text far more accurately. JPEG is smaller."
       },
